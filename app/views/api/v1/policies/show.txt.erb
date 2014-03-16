@@ -1,0 +1,15 @@
+
+; Policy rendered <%= Time.now.strftime("%Y/%m/%d %H:%M:%S") %>
+; <%= @policy.keys.size -%> categories
+; <%= @policy.values.flatten.size -%> total categorizations
+;
+; <% @policy.each do |category, sites| %>
+;   <%= category.name %>:
+;     <%= category.description %>
+;
+define category "<%= category.name %>"  ; <%= sites.size -%> sites
+<% sites.each do |site| %>
+    <%= site.to_s %>
+<% end %>
+end category "<%= category.name %>"
+;  <% end %>

@@ -54,4 +54,31 @@ describe Site do
       expect(hname.uri).to eq('wibble.com')
     end
   end
+  context "adding and removing categories" do
+    describe "#add" do
+      it "adds individual categories by name"
+      it "adds multiple categories by name"
+      it "adds individual Category objects"
+      it "adds multiple Category objects"
+      it "adds categories as mixed strings and objects"
+      context "with validation failure" do 
+        it "rejects invalid categorization"
+        it "rejects invalid category names"
+        it "rejects missing categories"
+      end
+    end
+    describe "#remove" do
+      it "removes individual categories by name"
+      it "removes multiple categories by name"
+      it "removes individual Category objects"
+      it "removes multiple Category objects"
+      it "removes categories as mixed strings and objects"
+      context "with invalid association" do 
+        it "succeeds for categorizations not already associated"
+        it "rejects invalid category names"
+        it "rejects missing categories"
+      end
+    end
+  end
+
 end

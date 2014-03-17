@@ -20,7 +20,15 @@ group :development, :test do
   gem 'guard-rspec'
   gem 'guard-bundler'
   gem 'guard-brakeman'
-  gem 'libnotify'
+  case RbConfig::CONFIG["host_os"]
+    when /\Adarwin/i
+      gem 'terminal-notifier-guard'
+      gem 'rb-fsevent'
+    else
+      gem 'libnotify'  
+      gem 'rb-inotify'
+  end
+  
   gem 'rb-readline'
-  gem 'rb-inotify'
+  
 end

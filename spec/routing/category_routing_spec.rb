@@ -15,14 +15,27 @@ describe "category api request routing" do
       format:     "json"
     )
   end
-  it "passes updates to embedded site resources" do
-    expect(:put=> '/api/v1/categories/BLOCK_test/sites/wibble.com').to route_to(
-      controller:  "api/v1/sites",
-      action:      "categorize",
-      category_id: "BLOCK_test",
-      id:          "wibble.com",
+  
+  it "passes add to controller #add action" do
+    expect(:post => '/api/v1/categories/BLOCK_test/add?uri=wibble.com&comment=test%20add').to route_to(
+      controller:  "api/v1/categories",
+      action:      "add",
+      id:          "BLOCK_test",
+      uri:         "wibble.com",
+      comment:     "test add",
       format:      "json"
     )
   end
+
+it "passes remove to controller #remove action" do
+    expect(:post => '/api/v1/categories/BLOCK_test/remove?uri=wibble.com').to route_to(
+      controller:  "api/v1/categories",
+      action:      "remove",
+      id:          "BLOCK_test",
+      uri:         "wibble.com",
+      format:      "json"
+    )
+  end
+
 
 end

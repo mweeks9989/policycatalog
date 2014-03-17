@@ -1,9 +1,39 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+pass_one:
+  name: PASS_one
+  description: Pass category test one
 
-one:
-  name: MyString
-  description: MyText
+pass_two:
+  name: PASS_two
+  description: Pass category test two
 
-two:
-  name: MyString
-  description: MyText
+pass_three:
+  name: PASS_three
+  description: Pass category test three
+
+pass_four:
+  name: PASS_four
+  description: Pass category test four
+
+pass_five:
+  name: PASS_five
+  description: Pass category test five
+
+block_one:
+  name: BLOCK_one
+  description: Block category test one
+
+block_two:
+  name: BLOCK_two
+  description: block category test two
+
+block_three:
+  name: BLOCK_three
+  description: block category test three
+
+block_four:
+  name: BLOCK_four
+  description: block category test four
+
+block_five:
+  name: BLOCK_five
+  description: block category test five

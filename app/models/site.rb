@@ -28,12 +28,23 @@ class Site < ActiveRecord::Base
     uri
   end
 
-  def categorize_by_name(*names)
-    found = names.map {|cat| Category.find_by_name(cat) }
-    categories << found.flatten.compact
+  def add(*items)
+  end
+  
+  def remove(*items)
   end
 
   private
+  def fetch_associated(item)
+    case item
+      when Category
+        item
+      when String
+        Category.find_by_name(item)
+      else
+        nil
+    end
+  end
 
   def strip_scheme
     begin

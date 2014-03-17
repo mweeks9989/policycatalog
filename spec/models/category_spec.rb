@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Category do
-  context "creating and removing categories" do
+  context "creating categories with validation" do
     it "requires descriptions" do 
       no_desc=Category.create(name: "no_desc")
       expect(no_desc).to have(1).error_on(:description)
@@ -21,6 +21,56 @@ describe Category do
     it "has no sites included after creation" do
       one=Category.create(name: "cat_one", description: "category one")
       expect(one.sites).to be_empty
+    end
+  end
+  
+  context "adding and removing sites" do 
+    before(:each) do
+      @cat  = Category.create(name: "cat_one",     description: "category one")
+      @site =     Site.create(uri:  "siteone.com",     comment: "site one")
+      @site2 =    Site.create(uri:  "sitetwo.com",     comment: "site two")
+    end
+
+    describe "#add" do
+      it "adds single Site objects" do
+        @cat.add(@site)
+        expect(@cat.sites).to eq([@site])
+      end
+
+      it "adds multiple Site objects" do
+        @cat.add(@site,@site2)
+        expect(@cat.sites).to eq([@site,@site2])
+      end
+      
+      it "adds single sites from uri strings" do
+        @cat.add("siteone.com")
+        expect(@cat.sites).to eq([@site])
+      end
+
+      it "adds single sites from uri strings" do
+        @cat.add("siteone.com","sitetwo.com")
+        expect(@cat.sites).to eq([@site,@site2])
+      end
+
+      it "adds mixed uri and site objects" do
+        @cat.add("siteone.com",@site2)
+        expect(@cat.sites).to eq([@site,@site2])
+      end
+      
+      context "with invalid association" do
+        it "rejects invalid categorization" do
+          result=@cat.add(@site,@site)
+          expect(result.errors[:base]).to include("siteone.com: Validation failed: Site cannot be included in the same category more than once")
+        end
+        it "rejects invalid uris" do
+          result=@cat.add("womble")
+          expect(result.errors[:base]).to include("womble: invalid uri, or site not in database")
+        end
+        it "rejects missing uris" do
+          result=@cat.add(nil)
+          expect(result.errors[:base]).to include(": invalid uri, or site not in database")
+        end
+      end
     end
   end
 end

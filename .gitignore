@@ -1,3 +1,4 @@
+Gemfile.lock
 /.bundle
 capybara-*.html
 config/secrets.yml
